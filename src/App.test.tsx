@@ -1,20 +1,21 @@
 import React from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from './App'
+import { act } from 'react-dom/test-utils'
 
 describe('Todo Application', () => {
   test('should add a todo when user types in the input and presses enter', async () => {
     render(<App />)
 
-    const todoInput = screen.getByTestId('todo-input')
+    const todoInput = await screen.findByTestId('todo-input')
     expect(todoInput).toBeInTheDocument()
 
-    userEvent.type(todoInput, 'Learn React')
-    userEvent.type(todoInput, '{enter}')
-
-    await waitFor(() => {
-      expect(screen.getByText('Learn React')).toBeInTheDocument()
+    act(() => {
+      userEvent.type(todoInput, 'Learn React')
+      userEvent.type(todoInput, '{enter}')
     })
+
+    expect(await screen.findByText('Learn React')).toBeInTheDocument()
   })
 })
