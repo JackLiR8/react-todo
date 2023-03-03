@@ -22,6 +22,8 @@ describe("Component TodoInput", () => {
 
     expect(onAddTodo).toHaveBeenCalledTimes(1);
     expect(onAddTodo).toBeCalledWith("Learn React");
+    // clear input after adding todo
+    expect(todoInput).toHaveValue("");
   });
 
   it("should not trigger onAddTodo when user types in the input", async () => {
