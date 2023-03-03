@@ -1,6 +1,7 @@
-import React, { KeyboardEventHandler, useState } from "react"
+import type { KeyboardEventHandler } from 'react'
+import React, { useState } from 'react'
 
-type TodoInputProps = {
+interface TodoInputProps {
   onAddTodo: (title: string) => void
 }
 

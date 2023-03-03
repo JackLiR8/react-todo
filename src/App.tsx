@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <TodoInput onAddTodo={handleAddTodo} />
 
-      <ul className='todo-list'>
+      <ul className="todo-list">
         {todoList.map(todo => (<li key={todo.id}>{todo.title}</li>))}
       </ul>
     </div>

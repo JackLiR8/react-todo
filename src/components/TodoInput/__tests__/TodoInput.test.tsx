@@ -1,58 +1,58 @@
-import React from "react";
-import { act, render, screen } from "@testing-library/react";
-import TodoInput from "../index";
-import userEvent from "@testing-library/user-event";
+import React from 'react'
+import { act, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import TodoInput from '../index'
 
-describe("Component TodoInput", () => {
-  it("should render a TodoInput", async () => {
-    render(<TodoInput onAddTodo={jest.fn()} />);
+describe('Component TodoInput', () => {
+  it('should render a TodoInput', async () => {
+    render(<TodoInput onAddTodo={jest.fn()} />)
 
-    expect(await screen.findByTestId("todo-input")).toBeInTheDocument();
-  });
+    expect(await screen.findByTestId('todo-input')).toBeInTheDocument()
+  })
 
-  it("should trigger onAddTodo when user types in the input and presses enter", async () => {
-    const onAddTodo = jest.fn();
-    render(<TodoInput onAddTodo={onAddTodo} />);
+  it('should trigger onAddTodo when user types in the input and presses enter', async () => {
+    const onAddTodo = jest.fn()
+    render(<TodoInput onAddTodo={onAddTodo} />)
 
-    const todoInput = await screen.findByTestId("todo-input");
+    const todoInput = await screen.findByTestId('todo-input')
     act(() => {
-      userEvent.type(todoInput, "Learn React");
-      userEvent.type(todoInput, "{enter}");
+      userEvent.type(todoInput, 'Learn React')
+      userEvent.type(todoInput, '{enter}')
     })
 
-    expect(onAddTodo).toHaveBeenCalledTimes(1);
-    expect(onAddTodo).toBeCalledWith("Learn React");
+    expect(onAddTodo).toHaveBeenCalledTimes(1)
+    expect(onAddTodo).toBeCalledWith('Learn React')
     // clear input after adding todo
-    expect(todoInput).toHaveValue("");
-  });
+    expect(todoInput).toHaveValue('')
+  })
 
-  it("should not trigger onAddTodo when user types in the input", async () => {
-    const onAddTodo = jest.fn();
-    render(<TodoInput onAddTodo={onAddTodo} />);
+  it('should not trigger onAddTodo when user types in the input', async () => {
+    const onAddTodo = jest.fn()
+    render(<TodoInput onAddTodo={onAddTodo} />)
 
-    const todoInput = await screen.findByTestId("todo-input");
+    const todoInput = await screen.findByTestId('todo-input')
     act(() => {
-      userEvent.type(todoInput, "Learn React");
+      userEvent.type(todoInput, 'Learn React')
     })
 
-    expect(onAddTodo).not.toHaveBeenCalled();
-  });
+    expect(onAddTodo).not.toHaveBeenCalled()
+  })
 
-  it("should not trigger onAddTodo when input is empty", async () => {
-    const onAddTodo = jest.fn();
-    render(<TodoInput onAddTodo={onAddTodo} />);
+  it('should not trigger onAddTodo when input is empty', async () => {
+    const onAddTodo = jest.fn()
+    render(<TodoInput onAddTodo={onAddTodo} />)
 
-    const todoInput = await screen.findByTestId("todo-input");
-    userEvent.type(todoInput, "{enter}");
+    const todoInput = await screen.findByTestId('todo-input')
+    userEvent.type(todoInput, '{enter}')
 
-    expect(onAddTodo).not.toHaveBeenCalled();
+    expect(onAddTodo).not.toHaveBeenCalled()
 
     act(() => {
-      userEvent.type(todoInput, "Learn React");
-      userEvent.clear(todoInput);
-      userEvent.type(todoInput, "{enter}");
+      userEvent.type(todoInput, 'Learn React')
+      userEvent.clear(todoInput)
+      userEvent.type(todoInput, '{enter}')
     })
 
-    expect(onAddTodo).not.toHaveBeenCalled();
-  });
-});
+    expect(onAddTodo).not.toHaveBeenCalled()
+  })
+})

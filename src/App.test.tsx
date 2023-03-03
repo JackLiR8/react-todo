@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import App from './App'
 import { act } from 'react-dom/test-utils'
+import App from './App'
 
 describe('Todo Application', () => {
   test('should add a todo when user types in the input and presses enter', async () => {
