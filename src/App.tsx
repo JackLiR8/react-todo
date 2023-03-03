@@ -1,29 +1,18 @@
-import type { KeyboardEventHandler } from 'react'
 import React, { useState } from 'react'
 import './App.css'
+import TodoInput from './components/TodoInput'
 import Todo from './models/Todo'
 
 function App() {
-  const [todoInputText, setTodoInputText] = useState('')
   const [todoList, setTodoList] = useState<Todo[]>([])
 
-  const handleTodoInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key !== 'Enter' || !todoInputText)
-      return
-
-    setTodoList(list => [...list, new Todo({ title: todoInputText })])
-    setTodoInputText('')
+  const handleAddTodo = (title: string) => {
+    setTodoList([...todoList, new Todo({ title })])
   }
 
   return (
     <div className="App">
-      <div className='todo-input-wrapper'>
-        <input
-          data-testid="todo-input"
-          onChange={e => setTodoInputText(e.target.value)}
-          onKeyDown={handleTodoInputKeyDown}
-        />
-      </div>
+      <TodoInput onAddTodo={handleAddTodo} />
 
       <ul className='todo-list'>
         {todoList.map(todo => (<li key={todo.id}>{todo.title}</li>))}
