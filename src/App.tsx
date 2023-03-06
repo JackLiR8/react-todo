@@ -10,12 +10,24 @@ function App() {
     setTodoList([...todoList, new Todo({ title })])
   }
 
+  const handleTodoToggle = (todo: Todo) => {
+    todo.toggleCompleted()
+    setTodoList([...todoList])
+  }
+
   return (
     <div className="App">
       <TodoInput onAddTodo={handleAddTodo} />
 
       <ul className="todo-list">
-        {todoList.map(todo => (<li key={todo.id}>{todo.title}</li>))}
+        {todoList.map(todo => (
+          <li
+            key={todo.id}
+            className="todo-item"
+            onClick={() => handleTodoToggle(todo)}
+            {...todo.completed && { 'data-completed': true }}
+          >{todo.title}</li>),
+        )}
       </ul>
     </div>
   )

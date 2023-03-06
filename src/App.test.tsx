@@ -18,4 +18,27 @@ describe('Todo Application', () => {
 
     expect(await screen.findByText('Learn React')).toBeInTheDocument()
   })
+
+  test('toggle active and completed of an item', async () => {
+    render(<App />)
+
+    const todoInput = await screen.findByTestId('todo-input')
+    act(() => {
+      userEvent.type(todoInput, 'Learn React')
+      userEvent.type(todoInput, '{enter}')
+    })
+
+    const todoItem = await screen.findByText('Learn React')
+    expect(todoItem).toBeInTheDocument()
+
+    act(() => {
+      userEvent.click(todoItem)
+    })
+    expect(todoItem).toHaveAttribute('data-completed', 'true')
+
+    act(() => {
+      userEvent.click(todoItem)
+    })
+    expect(todoItem).not.toHaveAttribute('data-completed')
+  })
 })
