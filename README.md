@@ -1,4 +1,5 @@
 # React Todo
+![React Todo](https://github.com/JackLiR8/react-todo/actions/workflows/ci.yml/badge.svg)
 
 Take challenges of `React Clean Code 7-Day Challenge` from [Juntao Qiu](https://github.com/abruzzi).
 
