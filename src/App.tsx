@@ -1,19 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './App.css'
 import TodoInput from './components/TodoInput'
-import Todo from './models/Todo'
+import { useTodos } from './hooks/useTodos'
 
 function App() {
-  const [todoList, setTodoList] = useState<Todo[]>([])
-
-  const handleAddTodo = (title: string) => {
-    setTodoList([...todoList, new Todo({ title })])
-  }
-
-  const handleTodoToggle = (todo: Todo) => {
-    todo.toggleCompleted()
-    setTodoList([...todoList])
-  }
+  const { todoList, handleAddTodo, handleTodoToggle } = useTodos()
 
   return (
     <div className="App">
@@ -25,7 +16,7 @@ function App() {
             key={todo.id}
             className="todo-item"
             onClick={() => handleTodoToggle(todo)}
-            {...todo.completed && { 'data-completed': true }}
+            data-completed={todo.completed ? true : undefined}
           >{todo.title}</li>),
         )}
       </ul>

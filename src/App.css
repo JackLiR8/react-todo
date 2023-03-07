@@ -10,6 +10,7 @@
   cursor: pointer;
 }
 
-.todo-item[data-completed="true"] {
+.todo-item[data-completed] {
   text-decoration: line-through;
+  color: #666;
 }
