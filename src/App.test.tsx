@@ -19,6 +19,23 @@ describe('Todo Application', () => {
     expect(await screen.findByText('Learn React')).toBeInTheDocument()
   })
 
+  test('should not add same todo twice', async () => {
+    render(<App />)
+
+    const todoInput = await screen.findByTestId('todo-input')
+    act(() => {
+      userEvent.type(todoInput, 'Learn React')
+      userEvent.type(todoInput, '{enter}')
+    })
+
+    act(() => {
+      userEvent.type(todoInput, 'Learn React')
+      userEvent.type(todoInput, '{enter}')
+    })
+
+    expect(await screen.findAllByText('Learn React')).toHaveLength(1)
+  })
+
   test('toggle active and completed of an item', async () => {
     render(<App />)
 

@@ -5,7 +5,13 @@ export function useTodos() {
   const [todoList, setTodoList] = useState<Todo[]>([])
 
   const handleTodoAdd = (title: string) => {
+    if (!title || hasDuplicateTodo())
+      return
     setTodoList([...todoList, new Todo({ title })])
+
+    function hasDuplicateTodo() {
+      return todoList.some(todo => todo.title === title)
+    }
   }
 
   const handleTodoToggle = (todo: Todo) => {
