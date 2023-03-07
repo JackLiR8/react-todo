@@ -1,7 +1,7 @@
 import type { KeyboardEventHandler } from 'react'
 import React, { useState } from 'react'
 
-interface TodoInputProps {
+type TodoInputProps = {
   onAddTodo: (title: string) => void
 }
 

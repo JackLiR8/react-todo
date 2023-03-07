@@ -4,7 +4,7 @@ import Todo from '../models/Todo'
 export function useTodos() {
   const [todoList, setTodoList] = useState<Todo[]>([])
 
-  const handleAddTodo = (title: string) => {
+  const handleTodoAdd = (title: string) => {
     setTodoList([...todoList, new Todo({ title })])
   }
 
@@ -13,9 +13,14 @@ export function useTodos() {
     setTodoList([...todoList])
   }
 
+  const handleTodoRemove = (todo: Todo) => {
+    setTodoList(todoList.filter(t => t.id !== todo.id))
+  }
+
   return {
     todoList,
-    handleAddTodo,
+    handleTodoAdd,
     handleTodoToggle,
+    handleTodoRemove,
   }
 }

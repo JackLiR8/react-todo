@@ -1,24 +1,25 @@
 import React from 'react'
 import './App.css'
 import TodoInput from './components/TodoInput'
+import TodoItem from './components/TodoItem'
 import { useTodos } from './hooks/useTodos'
 
 function App() {
-  const { todoList, handleAddTodo, handleTodoToggle } = useTodos()
+  const { todoList, handleTodoAdd, handleTodoToggle, handleTodoRemove } = useTodos()
 
   return (
     <div className="App">
-      <TodoInput onAddTodo={handleAddTodo} />
+      <TodoInput onAddTodo={handleTodoAdd} />
 
       <ul className="todo-list">
         {todoList.map(todo => (
-          <li
+          <TodoItem
             key={todo.id}
-            className="todo-item"
-            onClick={() => handleTodoToggle(todo)}
-            data-completed={todo.completed ? true : undefined}
-          >{todo.title}</li>),
-        )}
+            todo={todo}
+            onRemove={handleTodoRemove}
+            onToggle={handleTodoToggle}
+          />
+        ))}
       </ul>
     </div>
   )
