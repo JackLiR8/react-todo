@@ -9,9 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      <TodoInput onAddTodo={handleTodoAdd} />
-
-      <ul className="todo-list">
+      <div className="todo-list">
         {todoList.map(todo => (
           <TodoItem
             key={todo.id}
@@ -20,7 +18,9 @@ function App() {
             onToggle={handleTodoToggle}
           />
         ))}
-      </ul>
+      </div>
+
+      <TodoInput onAddTodo={handleTodoAdd} />
     </div>
   )
 }

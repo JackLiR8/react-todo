@@ -8,7 +8,7 @@ export type TodoItemProps = {
 export default function TodoItem(props: TodoItemProps) {
   const { todo, onToggle, onRemove } = props
   return (
-    <li
+    <div
       className="todo-item"
       data-completed={todo.completed ? true : undefined}
       onClick={() => onToggle?.(todo)}
@@ -22,6 +22,6 @@ export default function TodoItem(props: TodoItemProps) {
           onRemove?.(todo)
         }}
       >x</button>
-    </li>
+    </div>
   )
 }

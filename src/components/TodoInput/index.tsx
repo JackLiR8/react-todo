@@ -18,9 +18,10 @@ export default function TodoInput(props: TodoInputProps) {
   }
 
   return (
-    <div className='todo-input-wrapper'>
+    <div className='todo-input__wrapper'>
       <input
         data-testid="todo-input"
+        className="todo-input"
         value={todoInputText}
         onChange={e => setTodoInputText(e.target.value)}
         onKeyDown={handleTodoInputKeyDown}
