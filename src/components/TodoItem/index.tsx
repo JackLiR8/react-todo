@@ -10,6 +10,7 @@ export default function TodoItem(props: TodoItemProps) {
   return (
     <div
       className="todo-item"
+      data-testid="todo-item"
       data-completed={todo.completed ? true : undefined}
       onClick={() => onToggle?.(todo)}
     >

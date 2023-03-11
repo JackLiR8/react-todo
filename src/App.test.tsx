@@ -82,4 +82,51 @@ describe('Todo Application', () => {
     expect(removeItem).not.toBeInTheDocument()
     expect(await screen.findByText('Learn Redux')).toBeInTheDocument()
   })
+
+  test('support filtering by status', async () => {
+    render(<App />)
+
+    const todoInput = await screen.findByTestId('todo-input')
+    act(() => {
+      userEvent.type(todoInput, 'reading')
+      userEvent.type(todoInput, '{enter}')
+    })
+    act(() => {
+      userEvent.type(todoInput, 'coding')
+      userEvent.type(todoInput, '{enter}')
+    })
+
+    screen.getByText('Total: 2')
+    screen.getByText('Active: 2')
+    screen.getByText('Completed: 0')
+
+    act(() => {
+      userEvent.type(todoInput, 'writing')
+      userEvent.type(todoInput, '{enter}')
+    })
+    const writingTodo = await screen.findByText('writing')
+    act(() => {
+      userEvent.click(writingTodo)
+    })
+    const allStatusButton = await screen.findByText('Total: 3')
+    const activeStatusButton = await screen.findByText('Active: 2')
+    const completedStatusButton = await screen.findByText('Completed: 1')
+
+    expect(screen.getAllByTestId('todo-item').length).toBe(3)
+
+    act(() => {
+      userEvent.click(activeStatusButton)
+    })
+    expect(screen.getAllByTestId('todo-item').length).toBe(2)
+
+    act(() => {
+      userEvent.click(completedStatusButton)
+    })
+    expect(screen.getAllByTestId('todo-item').length).toBe(1)
+
+    act(() => {
+      userEvent.click(allStatusButton)
+    })
+    expect(screen.getAllByTestId('todo-item').length).toBe(3)
+  })
 })
